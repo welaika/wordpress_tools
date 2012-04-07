@@ -27,6 +27,8 @@ RSpec.configure do |config|
   #   end
   # end
   
+  FileUtils.mkdir('tmp') unless File.directory? 'tmp'
+  
   def capture(stream)
     begin
       stream = stream.to_s
