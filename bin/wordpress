@@ -1,0 +1,4 @@
+#!/usr/bin/env ruby
+
+require 'wordpress_tools/cli'
+WordPressTools::CLI.start
