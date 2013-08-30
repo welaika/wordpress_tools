@@ -2,6 +2,8 @@
 
 A command line tool to help manage your WordPress sites.
 
+[![Build Status](https://travis-ci.org/welaika/wordpress_tools.png?branch=master)](https://travis-ci.org/welaika/wordpress_tools)
+
 ## Installation
 
     gem install wordpress_tools
