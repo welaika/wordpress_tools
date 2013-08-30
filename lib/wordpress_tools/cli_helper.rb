@@ -2,18 +2,23 @@ require 'open-uri'
 
 module WordPressTools
   module CLIHelper
+    def info(message)
+      log_message message
+    end
+
     def error(message)
-      say message, :red
+      log_message message, :red
+      exit
     end
 
     def success(message)
-      say message, :green
+      log_message message, :green
     end
 
     def warning(message)
-      say message, :yellow
+      log_message message, :yellow
     end
-    
+
     def download(url, destination)
       begin
         f = open(destination, "wb")
@@ -26,7 +31,7 @@ module WordPressTools
     end
 
     def unzip(file, destination)
-      run "unzip #{file} -d #{destination}", :verbose => false, :capture => true
+      run_command "unzip #{file} -d #{destination}"
     end
 
     def git_installed?
@@ -34,9 +39,16 @@ module WordPressTools
       void = RbConfig::CONFIG['host_os'] =~ /msdos|mswin|djgpp|mingw/ ? 'NUL' : '/dev/null'
       system "git --version >>#{void} 2>&1"
     end
-    
-    def add_git_repo(repo, destination)
-      run "git clone #{repo} #{destination}", :verbose => false, :capture => true
+
+    private
+
+    def log_message(message, color = nil)
+      say message, color
     end
+
+    def run_command(command)
+      run command, verbose: false, capture: true
+    end
+
   end
 end

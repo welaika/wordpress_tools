@@ -1,68 +1,75 @@
 require 'spec_helper'
 
 describe WordPressTools::CLIHelper do
-  # def shell
-  #   @shell ||= Thor::Shell::Basic.new
-  # end
-  
-  before :each do
-    @cli = WordPressTools::CLI.new
-  end
-  
+  let(:cli) { WordPressTools::WordPressCLI.new }
+
   context "::download" do
+    let(:valid_url) { "http://www.example.com/test" }
+    let(:tempfile) { Tempfile.new("download_test") }
+
     before(:each) do
-      @tempfile = Tempfile.new("download_test")
-      @valid_url = "http://www.example.com/test"
-      FakeWeb.register_uri(:get, @valid_url, :body => "Download test")
+      FakeWeb.register_uri(:get, valid_url, :body => "Download test")
     end
-    
+
     it "downloads a file to the specified location" do
-      @cli.download(@valid_url, @tempfile.path)
-      open(@tempfile.path).read.should eq("Download test")
+      cli.download(valid_url, tempfile.path)
+      open(tempfile.path).read.should eq("Download test")
     end
-    
+
     it "returns true on success" do
-      @cli.download(@valid_url, @tempfile.path).should eq true
+      cli.download(valid_url, tempfile.path).should eq true
     end
-    
+
     it "returns false on failure" do
-      @cli.download("http://an.invalid.url", @tempfile.path).should eq false
-    end
-    
-    after(:each) do
-      @tempfile.close!
+      cli.download("http://an.invalid.url", tempfile.path).should eq false
     end
   end
-  
+
   context "::unzip" do
+    let(:path) { File.expand_path('spec/fixtures/zipped_file.zip') }
+    let(:destination) { "tmp/unzip" }
+
     it "unzips a file" do
-      @cli.unzip(File.expand_path('spec/fixtures/zipped_file.zip'), 'tmp/unzip')
-      File.exists?('tmp/unzip/zipped_file').should be true
-    end
-    
-    after(:each) do
-      FileUtils.rm_rf('tmp/unzip') if File.directory? 'tmp/unzip'
+      cli.should_receive(:run_command).with("unzip #{path} -d #{destination}")
+      cli.unzip(path, destination)
     end
   end
-  
+
+  context "::info" do
+    let(:message) { "I am an info" }
+
+    it "displays an info" do
+      cli.should_receive(:log_message).with(message)
+      cli.info(message)
+    end
+  end
+
   context "::error" do
+    let(:message) { "I am an error" }
+
     it "displays an error" do
-      $stdout.should_receive(:puts).with("\e[31mI am an error\e[0m")
-      @cli.error("I am an error")
+      cli.should_receive(:log_message).with(message, :red)
+      cli.should_receive(:exit)
+      cli.error(message)
     end
   end
-  
+
   context "::success" do
+    let(:message) { "I am a success message" }
+
     it "displays a success message" do
-      $stdout.should_receive(:puts).with("\e[32mI am a success message\e[0m")
-      @cli.success("I am a success message")
+      cli.should_receive(:log_message).with(message, :green)
+      cli.success(message)
     end
   end
 
   context "::warning" do
+    let(:message) { "I am a warning" }
+
     it "displays a warning" do
-      $stdout.should_receive(:puts).with("\e[33mI am a warning\e[0m")
-      @cli.warning("I am a warning")
+      cli.should_receive(:log_message).with(message, :yellow)
+      cli.warning(message)
     end
   end
 end
+
