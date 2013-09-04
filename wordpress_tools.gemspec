@@ -7,6 +7,7 @@ Gem::Specification.new do |gem|
   gem.description   = %q{Command line tool to manage WordPress installations.}
   gem.summary       = %q{Manage WordPress installations.}
   gem.homepage      = "http://github.com/welaika/wordpress_tools"
+  gem.license       = "MIT"
 
   gem.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   gem.files         = `git ls-files`.split("\n")
