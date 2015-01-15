@@ -23,6 +23,7 @@ module WordPressTools
       download_wordpress
       configure_bare_install
       initialize_git_repo
+      install_wp_cli unless wp_cli_installed?
     end
 
     private
@@ -70,6 +71,29 @@ module WordPressTools
       else
         warning "Could not find git installation."
       end
+    end
+
+    def install_wp_cli
+      FileUtils.mkdir_p(wp_cli_installation_dir)
+      need_sudo = !File.writable?(wp_cli_installation_dir)
+      download_with_curl(
+        "https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar",
+        wp_cli_installation_path,
+        sudo: need_sudo
+      )
+      if File.exists?(wp_cli_installation_path)
+        FileUtils.chmod(755, wp_cli_installation_path)
+      else
+        error "Could not install wp-cli"
+      end
+    end
+
+    def wp_cli_installation_path
+      '/usr/local/bin/wp'
+    end
+
+    def wp_cli_installation_dir
+      File.dirname(wp_cli_installation_path)
     end
 
   end

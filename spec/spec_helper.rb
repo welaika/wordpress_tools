@@ -18,6 +18,7 @@ RSpec.configure do |config|
   eof
   FakeWeb.register_uri(:get, %r|http://api.wordpress.org/core/version-check/1.5/.*|, :body => WP_API_RESPONSE)
   FakeWeb.register_uri(:get, "http://wordpress.org/wordpress-3.6.zip", :body => File.expand_path('spec/fixtures/wordpress_stub.zip'))
+  FakeWeb.register_uri(:get, "https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar", :body => File.expand_path('spec/fixtures/wp-cli.phar'))
 
 end
 

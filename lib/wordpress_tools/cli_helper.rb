@@ -48,6 +48,10 @@ module WordPressTools
       system "git --version >>#{void} 2>&1"
     end
 
+    def wp_cli_installed?
+      system("which wp-cli") || system("which wp")
+    end
+
     private
 
     def log_message(message, color = nil)

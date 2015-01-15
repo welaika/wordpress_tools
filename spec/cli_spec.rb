@@ -36,6 +36,24 @@ describe WordPressTools::CLI do
         (File.exists?('wordpress/wp-content/plugins/hello.php') || File.directory?('wordpress/wp-content/themes/twentyeleven')).should eq false
       end
     end
+
+    context "with wp-cli" do
+      let(:wp_cli_path) { './wp-cli' }
+      before do
+        WordPressTools::WordPressCLI.any_instance.stub(:wp_cli_installation_path).and_return(wp_cli_path)
+      end
+
+      it "installs wp-cli" do
+        WordPressTools::CLI.start ['new']
+        (File.exists?(wp_cli_path)).should eq true
+      end
+
+      it "sets wp-cli as executable" do
+        WordPressTools::CLI.start ['new']
+        (File.executable?(wp_cli_path)).should eq true
+      end
+    end
+
   end
 end
 
