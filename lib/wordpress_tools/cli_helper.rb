@@ -30,6 +30,14 @@ module WordPressTools
       end
     end
 
+    def download_with_curl(url, destionation, options = {})
+      sudo = options[:sudo] 
+      command = "curl '#{url}' -o '#{destionation}'"
+      command = "sudo #{command}" if sudo == true
+
+      run_command command
+    end
+
     def unzip(file, destination)
       run_command "unzip #{file} -d #{destination}"
     end
