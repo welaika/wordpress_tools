@@ -17,8 +17,8 @@ Gem::Specification.new do |gem|
   gem.version       = WordPressTools::VERSION
 
   gem.add_dependency "rake"
-  gem.add_dependency "thor"
+  gem.add_dependency "thor", ">= 0.18"
 
-  gem.add_development_dependency 'rspec'
-  gem.add_development_dependency 'fakeweb'
+  gem.add_development_dependency "rspec", "< 3"
+  gem.add_development_dependency "fakeweb", "~> 1.3.0"
 end
