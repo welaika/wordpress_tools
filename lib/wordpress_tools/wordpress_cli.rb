@@ -32,8 +32,12 @@ module WordPressTools
       @tempfile ||= Tempfile.new('wordpress')
     end
 
+    def http_download(domain, string)
+      Net::HTTP.get(domain, string)
+    end
+
     def download_wordpress
-      download_url, version, locale = Net::HTTP.get('api.wordpress.org', "/core/version-check/1.5/?locale=#{options[:locale]}").split[2,3]
+      download_url, version, locale = http_download('api.wordpress.org', "/core/version-check/1.5/?locale=#{options[:locale]}").split[2,3]
 
       info "Downloading WordPress #{version} (#{locale})..."
       download(download_url, tempfile.path) || error("Could not download WordPress.")
@@ -76,11 +80,11 @@ module WordPressTools
     def install_wp_cli
       FileUtils.mkdir_p(wp_cli_installation_dir)
       need_sudo = !File.writable?(wp_cli_installation_dir)
-      download_with_curl(
-        "https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar",
-        wp_cli_installation_path,
-        sudo: need_sudo
-      )
+      download_url, version, locale = http_download('raw.githubusercontent.com', '/wp-cli/builds/gh-pages/phar/wp-cli.phar').split[2,3]
+      # Move the doenload to a temp position and
+      # add a move method w/ sudo
+      download(download_url, wp_cli_installation_path)
+
       if File.exists?(wp_cli_installation_path)
         FileUtils.chmod(755, wp_cli_installation_path)
       else
