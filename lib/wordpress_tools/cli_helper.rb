@@ -44,7 +44,6 @@ module WordPressTools
 
     def git_installed?
       # http://stackoverflow.com/questions/4597490/platform-independent-way-of-detecting-if-git-is-installed
-      void = RbConfig::CONFIG['host_os'] =~ /msdos|mswin|djgpp|mingw/ ? 'NUL' : '/dev/null'
       system "git --version >>#{void} 2>&1"
     end
 
@@ -53,6 +52,10 @@ module WordPressTools
     end
 
     private
+
+    def void
+      RbConfig::CONFIG['host_os'] =~ /msdos|mswin|djgpp|mingw/ ? 'NUL' : '/dev/null'
+    end
 
     def log_message(message, color = nil)
       say message, color
