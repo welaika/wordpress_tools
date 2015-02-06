@@ -1,9 +1,11 @@
 require 'spec_helper'
 
-describe WordPressTools::CLI do
+describe WordPressTools::WordPress do
+
   before do
     @original_wd = Dir.pwd
     Dir.chdir('tmp')
+    WordPressTools::Configuration.stub(:ask_user!)
   end
 
   after do

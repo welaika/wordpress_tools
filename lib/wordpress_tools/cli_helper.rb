@@ -1,8 +1,6 @@
 module WordPressTools
   module CLIHelper
 
-    private
-
     def shell
       @shell ||= Thor::Shell::Color.new
     end
@@ -30,10 +28,6 @@ module WordPressTools
 
     def ask(message, options = {})
       shell.ask(message, options)
-    end
-
-    def run_command(command)
-      run command, verbose: false, capture: true
     end
 
     def download(url, destination)

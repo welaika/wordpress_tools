@@ -25,7 +25,7 @@ module WordPressTools
       end
 
       Configuration.ask_user!
-      WordPress.new(options, dir_name, self).install!
+      WordPress.new(dir_name, options, self).install!
       WPCLI.new.install!
       # Database.new(user_parameters, self).create!
     end

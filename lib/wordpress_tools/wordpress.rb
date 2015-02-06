@@ -1,15 +1,9 @@
 module WordPressTools
   class WordPress
     include WordPressTools::CLIHelper
-    attr_reader :options, :dir_name, :thor
+    attr_reader :dir_name, :options
 
-    [ :say, :run ].each do |sym|
-      define_method sym do |*args|
-        thor.send(sym, *args)
-      end
-    end
-
-    def initialize(options = {}, dir_name = 'wordpress', thor = nil)
+    def initialize(dir_name = 'wordpress', options = {})
       @options = options
       @dir_name = dir_name
       @thor = thor
@@ -62,7 +56,7 @@ module WordPressTools
 
     def initialize_git_repo
       if git_installed?
-        if run_command "cd #{dir_name} && git init"
+        if system("cd #{dir_name} && git init")
           success "Initialized git repository."
         else
           error "Could not initialize git repository."

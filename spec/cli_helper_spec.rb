@@ -35,41 +35,5 @@ describe WordPressTools::CLIHelper do
     end
   end
 
-  context "::info" do
-    let(:message) { "I am an info" }
-
-    it "displays an info" do
-      cli.should_receive(:log_message).with(message)
-      cli.info(message)
-    end
-  end
-
-  context "::error" do
-    let(:message) { "I am an error" }
-
-    it "displays an error" do
-      cli.should_receive(:log_message).with(message, :red)
-      cli.should_receive(:exit)
-      cli.error(message)
-    end
-  end
-
-  context "::success" do
-    let(:message) { "I am a success message" }
-
-    it "displays a success message" do
-      cli.should_receive(:log_message).with(message, :green)
-      cli.success(message)
-    end
-  end
-
-  context "::warning" do
-    let(:message) { "I am a warning" }
-
-    it "displays a warning" do
-      cli.should_receive(:log_message).with(message, :yellow)
-      cli.warning(message)
-    end
-  end
 end
 
