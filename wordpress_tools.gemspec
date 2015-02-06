@@ -17,6 +17,7 @@ Gem::Specification.new do |gem|
   gem.version       = WordPressTools::VERSION
 
   gem.add_dependency "thor", ">= 0.18"
+  gem.add_dependency "activesupport"
 
   gem.add_development_dependency "bundler", "~> 1.7"
   gem.add_development_dependency "rake", "~> 10.0"
