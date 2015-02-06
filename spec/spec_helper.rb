@@ -1,9 +1,9 @@
 require 'wordpress_tools/cli'
 require 'fakeweb'
 require 'thor'
+require 'pry-byebug'
 
 RSpec.configure do |config|
-  $stdout = StringIO.new
   FileUtils.mkdir('tmp') unless File.directory? 'tmp'
 
   FakeWeb.allow_net_connect = false
