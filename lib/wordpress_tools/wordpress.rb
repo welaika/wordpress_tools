@@ -1,7 +1,3 @@
-require 'tempfile'
-require 'net/http'
-require 'wordpress_tools/cli_helper'
-
 module WordPressTools
   class WordPress
     include WordPressTools::CLIHelper
@@ -19,11 +15,10 @@ module WordPressTools
       @thor = thor
     end
 
-    def download!
+    def install!
       download_wordpress
       configure_bare_install
       initialize_git_repo
-      install_wp_cli unless wp_cli_installed?
     end
 
     private
@@ -76,40 +71,5 @@ module WordPressTools
         warning "Could not find git installation."
       end
     end
-
-    def move_command(from, to, need_sudo = false)
-      sudo = 'sudo' if need_sudo
-      "#{sudo} mv '#{from}' '#{to}'"
-    end
-
-    def executable_bit_command(path, need_sudo = false)
-      sudo = 'sudo' if need_sudo
-      "#{sudo} chmod 755 '#{path}'"
-    end
-
-    def install_wp_cli
-      FileUtils.mkdir_p(wp_cli_installation_dir)
-      need_sudo = !File.writable?(wp_cli_installation_dir)
-      tempfile_wpcli = Tempfile.new('wpcli')
-
-      download('http://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar', tempfile_wpcli.path)
-
-      system(move_command(tempfile_wpcli.path, wp_cli_installation_path, need_sudo))
-
-      if File.exists?(wp_cli_installation_path)
-        system(executable_bit_command(wp_cli_installation_path, need_sudo))
-      else
-        error "Could not install wp-cli"
-      end
-    end
-
-    def wp_cli_installation_path
-      '/usr/local/bin/wp'
-    end
-
-    def wp_cli_installation_dir
-      File.dirname(wp_cli_installation_path)
-    end
-
   end
 end

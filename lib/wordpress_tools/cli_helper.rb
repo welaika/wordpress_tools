@@ -1,22 +1,39 @@
-require 'open-uri'
-
 module WordPressTools
   module CLIHelper
+
+    private
+
+    def shell
+      @shell ||= Thor::Shell::Color.new
+    end
+
     def info(message)
-      log_message message
+      shell.say message
     end
 
     def error(message)
-      log_message message, :red
+      shell.say message, :red
       exit
     end
 
     def success(message)
-      log_message message, :green
+      shell.say message, :green
+    end
+
+    def yes?(message)
+      shell.yes?(message)
     end
 
     def warning(message)
-      log_message message, :yellow
+      shell.say message, :yellow
+    end
+
+    def ask(message, options = {})
+      shell.ask(message, options)
+    end
+
+    def run_command(command)
+      run command, verbose: false, capture: true
     end
 
     def download(url, destination)
@@ -39,23 +56,19 @@ module WordPressTools
       system "git --version >>#{void} 2>&1"
     end
 
-    def wp_cli_installed?
-      system("which wp-cli >>#{void} 2>&1") || system("which wp >>#{void} 2>&1")
+
+    def move_command(from, to, need_sudo = false)
+      sudo = 'sudo' if need_sudo
+      "#{sudo} mv '#{from}' '#{to}'"
     end
 
-    private
+    def executable_bit_command(path, need_sudo = false)
+      sudo = 'sudo' if need_sudo
+      "#{sudo} chmod 755 '#{path}'"
+    end
 
     def void
       RbConfig::CONFIG['host_os'] =~ /msdos|mswin|djgpp|mingw/ ? 'NUL' : '/dev/null'
     end
-
-    def log_message(message, color = nil)
-      say message, color
-    end
-
-    def run_command(command)
-      run command, verbose: false, capture: true
-    end
-
   end
 end
