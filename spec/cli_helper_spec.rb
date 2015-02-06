@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe WordPressTools::CLIHelper do
-  let(:cli) { WordPressTools::WordPressCLI.new }
+  let(:cli) { WordPressTools::WordPress.new }
 
   context "::download" do
     let(:valid_url) { "http://www.example.com/test" }

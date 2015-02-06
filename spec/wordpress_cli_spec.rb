@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe WordPressTools::CLIHelper do
-  let(:cli) { WordPressTools::WordPressCLI.new({}, 'wordpress', Thor.new) }
+  let(:cli) { WordPressTools::WordPress.new({}, 'wordpress', Thor.new) }
 
   context "#install_wp_cli" do
     context "if wp-cli is already installed" do

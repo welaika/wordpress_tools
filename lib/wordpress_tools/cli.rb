@@ -1,5 +1,5 @@
 require 'thor'
-require 'wordpress_tools/wordpress_cli'
+require 'wordpress_tools/wordpress'
 require 'wordpress_tools/config'
 require 'active_support'
 require 'active_support/all'
@@ -14,8 +14,7 @@ module WordPressTools
 
     def new(dir_name = 'wordpress')
       user_parameters
-      WordPressCLI.new(options, dir_name, self).download!
-      
+      WordPress.new(options, dir_name, self).download!
     end
 
     private

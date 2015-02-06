@@ -40,8 +40,8 @@ describe WordPressTools::CLI do
     context "with wp-cli" do
       let(:wp_cli_path) { './wp-cli' }
       before do
-        WordPressTools::WordPressCLI.any_instance.stub(:wp_cli_installation_path).and_return(wp_cli_path)
-        WordPressTools::WordPressCLI.any_instance.stub(:wp_cli_installed?).and_return(false)
+        WordPressTools::WordPress.any_instance.stub(:wp_cli_installation_path).and_return(wp_cli_path)
+        WordPressTools::WordPress.any_instance.stub(:wp_cli_installed?).and_return(false)
       end
 
       it "installs wp-cli" do

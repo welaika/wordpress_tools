@@ -3,7 +3,7 @@ require 'net/http'
 require 'wordpress_tools/cli_helper'
 
 module WordPressTools
-  class WordPressCLI
+  class WordPress
     include WordPressTools::CLIHelper
     attr_reader :options, :dir_name, :thor
 
