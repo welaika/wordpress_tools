@@ -31,7 +31,7 @@ module WordPressTools
     end
 
     def download_with_curl(url, destionation, options = {})
-      sudo = options[:sudo] 
+      sudo = options[:sudo]
       command = "curl '#{url}' -o '#{destionation}'"
       command = "sudo #{command}" if sudo == true
 
@@ -48,7 +48,7 @@ module WordPressTools
     end
 
     def wp_cli_installed?
-      system("which wp-cli") || system("which wp")
+      system("which wp-cli >>#{void} 2>&1") || system("which wp >>#{void} 2>&1")
     end
 
     private
