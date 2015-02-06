@@ -25,23 +25,6 @@ describe WordPressTools::CLIHelper do
     end
   end
 
-  context "::download_with_curl" do
-    let(:valid_url) { "http://www.example.com/test" }
-    let(:tempfile) { Tempfile.new("download_test") }
-
-    it "downloads a file to the specified location" do
-      cli.should_receive(:run_command).with("curl '#{valid_url}' -o '#{tempfile.path}'")
-      cli.download_with_curl(valid_url, tempfile.path)
-    end
-
-    context "with sudo" do
-      it "downloads a file to the specified location" do
-        cli.should_receive(:run_command).with("sudo curl '#{valid_url}' -o '#{tempfile.path}'")
-        cli.download_with_curl(valid_url, tempfile.path, sudo: true)
-      end
-    end
-  end
-
   context "::unzip" do
     let(:path) { File.expand_path('spec/fixtures/zipped_file.zip') }
     let(:destination) { "tmp/unzip" }
