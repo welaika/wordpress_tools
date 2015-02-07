@@ -42,7 +42,7 @@ module WordPressTools
     end
 
     def unzip(file, destination)
-      run_command "unzip #{file} -d #{destination}"
+      system("unzip #{file} -d #{destination}")
     end
 
     def git_installed?

@@ -9,7 +9,7 @@ module WordPressTools
       move_wp_cli
       make_wp_cli_executable
 
-      if File.exists?(wp_cli_path)
+      if File.exist?(wp_cli_path)
         success "WP-CLI installed."
       else
         error "Could not install WP-CLI."

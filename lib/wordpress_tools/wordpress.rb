@@ -3,7 +3,7 @@ module WordPressTools
     include WordPressTools::CLIHelper
     attr_reader :dir_name, :options
 
-    def initialize(dir_name = 'wordpress', options = {})
+    def initialize(dir_name = 'wordpress', options = {}, thor = nil)
       @options = options
       @dir_name = dir_name
       @thor = thor

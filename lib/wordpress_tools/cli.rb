@@ -1,15 +1,3 @@
-require 'tempfile'
-require 'net/http'
-require 'open-uri'
-require 'thor'
-require 'active_support'
-require 'active_support/all'
-
-require 'wordpress_tools/cli_helper'
-require 'wordpress_tools/wp_cli'
-require 'wordpress_tools/wordpress'
-require 'wordpress_tools/config'
-
 module WordPressTools
   class CLI < Thor
     include Thor::Actions
@@ -19,7 +7,7 @@ module WordPressTools
     method_option :bare, :aliases => "-b", :desc => "Remove default themes and plugins"
 
     def new(dir_name = 'wordpress')
-      if File.exists?(dir_name)
+      if File.exist?(dir_name)
         say "Directory #{dir_name} already exists.", :red
         exit
       end

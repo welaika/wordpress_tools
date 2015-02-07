@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe WordPressTools::CLIHelper do
   let(:cli) { WordPressTools::WordPress.new }
 
@@ -13,15 +11,15 @@ describe WordPressTools::CLIHelper do
 
     it "downloads a file to the specified location" do
       cli.download(valid_url, tempfile.path)
-      open(tempfile.path).read.should eq("Download test")
+      expect(open(tempfile.path).read).to eq("Download test")
     end
 
     it "returns true on success" do
-      cli.download(valid_url, tempfile.path).should eq true
+      expect(cli.download(valid_url, tempfile.path)).to eq(true)
     end
 
     it "returns false on failure" do
-      cli.download("http://an.invalid.url", tempfile.path).should eq false
+      expect(cli.download("http://an.invalid.url", tempfile.path)).to eq(false)
     end
   end
 
@@ -30,7 +28,7 @@ describe WordPressTools::CLIHelper do
     let(:destination) { "tmp/unzip" }
 
     it "unzips a file" do
-      cli.should_receive(:run_command).with("unzip #{path} -d #{destination}")
+      expect(cli).to receive(:system).with("unzip #{path} -d #{destination}")
       cli.unzip(path, destination)
     end
   end
