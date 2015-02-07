@@ -1,9 +1,9 @@
-require 'tempfile'
-require 'net/http'
-require 'open-uri'
-require 'thor'
-require 'active_support'
-require 'active_support/all'
+require "tempfile"
+require "net/http"
+require "open-uri"
+require "thor"
+require "active_support"
+require "active_support/all"
 
 require "wordpress_tools/version"
 require "wordpress_tools/cli"

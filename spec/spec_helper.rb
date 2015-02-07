@@ -1,8 +1,8 @@
 require 'fakeweb'
 require 'pry-byebug'
-require 'pathname'
+require 'priscilla'
 
-require (Pathname.new(__FILE__).dirname + '../lib/wordpress_tools').expand_path
+require 'wordpress_tools'
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|

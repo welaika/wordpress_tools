@@ -1,9 +1,7 @@
 #!/usr/bin/env ruby
 
-require 'pathname'
-
-source_path = (Pathname.new(__FILE__).dirname + '../lib').expand_path
-$LOAD_PATH << source_path
+lib = File.expand_path('../../lib', __FILE__)
+$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 require 'wordpress_tools'
 
