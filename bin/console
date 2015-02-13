@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+
+require "bundler/setup"
+require "wordpress_tools"
+require "pry"
+
+Pry.start
