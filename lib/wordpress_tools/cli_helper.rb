@@ -19,23 +19,8 @@ module WordPressTools
       say message, :yellow
     end
 
-    def download(url, destination)
-      begin
-        f = open(destination, "wb")
-        f.write(open(url).read) ? true : false
-      rescue
-        false
-      ensure
-        f.close
-      end
-    end
-
     def unzip(file, destination)
       run_command("unzip #{file} -d #{destination}")
-    end
-
-    def git_installed?
-      run_command("git --version")
     end
 
     def move_command(from, to, need_sudo = false)

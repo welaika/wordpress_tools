@@ -16,9 +16,11 @@ module WordPressTools
         exit
       end
 
-      WordPress.new.invoke :install, [dir_name], options
-      # WPCLI.new.invoke :install
-      # Database.new.invoke :create
+      WPCLI.new.invoke :install_core, options
+      # WPCLI.new.invoke :install_wpserver, options
+      # Database.new.invoke :create, [dir_name], options
+      # WordPress.new.invoke :download, [dir_name], options
+      # WordPress.new.invoke :setup, [dir_name], options
     end
   end
 end

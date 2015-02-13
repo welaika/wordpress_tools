@@ -6,8 +6,8 @@ module WordPressTools
     method_option :locale, aliases: "-l", desc: "WordPress locale (default is en_US)"
     method_option :bare, aliases: "-b", desc: "Remove default themes and plugins"
 
-    desc "install [DIR_NAME]", ""
-    def install(dir_name = "wordpress")
+    desc "download [DIR_NAME]", ""
+    def download(dir_name = "wordpress")
       @dir_name = dir_name
       download_wordpress
       configure_bare_install
