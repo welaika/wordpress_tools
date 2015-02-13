@@ -12,5 +12,7 @@ require "wordpress_tools/config"
 require "wordpress_tools/wordpress"
 require "wordpress_tools/wp_cli"
 
+require "pry"
+
 module WordPressTools
 end

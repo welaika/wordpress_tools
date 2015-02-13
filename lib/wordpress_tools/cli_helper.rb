@@ -1,33 +1,22 @@
 module WordPressTools
   module CLIHelper
-
-    def shell
-      @shell ||= Thor::Shell::Color.new
-    end
+    include Thor::Actions
 
     def info(message)
-      shell.say message
+      say message
     end
 
     def error(message)
-      shell.say message, :red
+      say message, :red
       exit
     end
 
     def success(message)
-      shell.say message, :green
-    end
-
-    def yes?(message)
-      shell.yes?(message)
+      say message, :green
     end
 
     def warning(message)
-      shell.say message, :yellow
-    end
-
-    def ask(message, options = {})
-      shell.ask(message, options)
+      say message, :yellow
     end
 
     def download(url, destination)
@@ -42,14 +31,12 @@ module WordPressTools
     end
 
     def unzip(file, destination)
-      system("unzip #{file} -d #{destination}")
+      run_command("unzip #{file} -d #{destination}")
     end
 
     def git_installed?
-      # http://stackoverflow.com/questions/4597490/platform-independent-way-of-detecting-if-git-is-installed
-      system "git --version >>#{void} 2>&1"
+      run_command("git --version")
     end
-
 
     def move_command(from, to, need_sudo = false)
       sudo = 'sudo' if need_sudo
@@ -63,6 +50,10 @@ module WordPressTools
 
     def void
       RbConfig::CONFIG['host_os'] =~ /msdos|mswin|djgpp|mingw/ ? 'NUL' : '/dev/null'
+    end
+
+    def run_command(command)
+      system("#{command} >>#{void} 2>&1")
     end
   end
 end
