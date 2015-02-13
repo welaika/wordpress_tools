@@ -66,7 +66,7 @@ describe WordPressTools::WPCLI do
         body: wp_server_fixture_path
       )
       allow(cli).to receive(:wp_cli_config_path).and_return(wp_cli_config_path)
-      allow(cli).to receive(:wp_server_direcory).and_return(wp_server_destination_path)
+      allow(cli).to receive(:wp_server_directory).and_return(wp_server_destination_path)
     end
 
     context "overwrite existing file" do

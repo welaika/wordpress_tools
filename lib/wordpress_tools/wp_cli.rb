@@ -38,7 +38,7 @@ module WordPressTools
 
       def overwrite_wp_server?
         if wp_server_installed?
-          yes? "WP-CLI server command already installed [#{wp_server_direcory}]. Do you want to overwite it? [y]es, [N]o"
+          yes? "WP-CLI server command already installed [#{wp_server_directory}]. Do you want to overwite it? [y]es, [N]o"
         else
           true
         end
@@ -49,7 +49,7 @@ module WordPressTools
       end
 
       def wp_server_installed?
-        File.exist?(File.join(wp_server_direcory, 'command.php'))
+        File.exist?(File.join(wp_server_directory, 'command.php'))
       end
 
       def download_wp_cli
@@ -70,17 +70,17 @@ module WordPressTools
       end
 
       def remove_existing_wp_server
-        FileUtils.rm_rf([wp_server_direcory, wp_cli_config_path])
+        FileUtils.rm_rf([wp_server_directory, wp_cli_config_path])
       end
 
       def download_wp_server
         info "Installing WP-CLI server command"
         get(wp_server_download_url, wp_server_download_path, verbose: false, force: true) || error("Cannot download WP-CLI server command")
 
-        FileUtils.mkdir_p(wp_server_direcory)
-        unzip(wp_server_download_path, wp_server_direcory, "-j")
+        FileUtils.mkdir_p(wp_server_directory)
+        unzip(wp_server_download_path, wp_server_directory, "-j")
 
-        success "Installed WP-CLI server command in '#{wp_server_direcory}'"
+        success "Installed WP-CLI server command in '#{wp_server_directory}'"
       end
 
       def configure_wp_server
@@ -117,12 +117,12 @@ module WordPressTools
         Configuration.for(:wp_server_download_url)
       end
 
-      def wp_server_direcory
-        Configuration.for(:wp_server_direcory)
+      def wp_server_directory
+        File.expand_path(Configuration.for(:wp_server_directory))
       end
 
       def wp_cli_config_path
-        Configuration.for(:wp_cli_config_path)
+        File.expand_path(Configuration.for(:wp_cli_config_path))
       end
 
     end
