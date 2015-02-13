@@ -1,3 +1,5 @@
+$LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
+
 require 'fakeweb'
 require 'pry-byebug'
 require 'priscilla'
