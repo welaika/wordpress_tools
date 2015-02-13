@@ -19,8 +19,12 @@ module WordPressTools
       say message, :yellow
     end
 
-    def unzip(file, destination)
-      run_command("unzip #{file} -d #{destination}")
+    def git_installed?
+      run_command("git --version")
+    end
+
+    def unzip(file, destination, extra_options = '')
+      run_command("unzip #{extra_options} #{file} -d #{destination}")
     end
 
     def move_command(from, to, need_sudo = false)

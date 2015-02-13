@@ -17,7 +17,7 @@ module WordPressTools
       end
 
       WPCLI.new.invoke :install_core, options
-      # WPCLI.new.invoke :install_wpserver, options
+      # WPCLI.new.invoke :install_wp_server, options
       # Database.new.invoke :create, [dir_name], options
       # WordPress.new.invoke :download, [dir_name], options
       # WordPress.new.invoke :setup, [dir_name], options

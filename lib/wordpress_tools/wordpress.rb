@@ -24,11 +24,11 @@ module WordPressTools
         download_url, version, locale = Net::HTTP.get('api.wordpress.org', "/core/version-check/1.5/?locale=#{options[:locale]}").split[2,3]
 
         info "Downloading WordPress #{version} (#{locale})..."
-        get(download_url, tempfile.path, force: true, verbose: false) || error("Could not download WordPress.")
+        get(download_url, tempfile.path, force: true, verbose: false) || error("Could not download WordPress")
         unzip(tempfile.path, dir_name) || error("Could not unzip WordPress.")
         remove_nested_subdirectory
 
-        success %Q{Installed WordPress in directory "#{dir_name}".}
+        success "Installed WordPress in directory '#{dir_name}'"
       end
 
       def remove_nested_subdirectory
@@ -45,24 +45,20 @@ module WordPressTools
           dirs.each do |dir|
             FileUtils.cp "#{dir_name}/wp-content/index.php", dir
           end
-          success "Removed default themes and plugins."
+          success "Removed default themes and plugins"
         end
       end
 
       def initialize_git_repo
         if git_installed?
           if run_command("cd #{dir_name} && git init")
-            success "Initialized git repository."
+            success "Initialized git repository"
           else
-            error "Could not initialize git repository."
+            error "Could not initialize git repository"
           end
         else
-          warning "Could not find git installation."
+          warning "Could not find git installation"
         end
-      end
-
-      def git_installed?
-        run_command("git --version")
       end
 
     end
