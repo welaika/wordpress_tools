@@ -1,6 +1,6 @@
 module WordPressTools
   class CLI < Thor
-    include Thor::Actions
+    include CLIHelper
 
     desc "new [DIR_NAME]", "download the latest stable version of WordPress in a new directory with specified name (default is wordpress)"
     method_option :locale, aliases: "-l", desc: "WordPress locale (default is en_US)"
@@ -20,7 +20,9 @@ module WordPressTools
       WPCLI.new.invoke :install_wp_server, options
       Database.new.invoke :create, [dir_name, options[:db_user], options[:db_password]]
       WordPress.new.invoke :download, [dir_name], options
-      # WordPress.new.invoke :setup, [dir_name], options
+      WordPress.new.invoke :setup, [dir_name, options[:db_user], options[:db_password], options[:admin_email], options[:admin_password], options[:locale]]
+
+      success("All done. Good job!")
     end
   end
 end

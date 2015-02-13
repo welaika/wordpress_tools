@@ -14,6 +14,16 @@ module WordPressTools
       initialize_git_repo
     end
 
+    desc "setup [FOOOBAR]", ""
+    def setup(dir_name, db_user, db_password, admin_email, admin_password, locale)
+      db_password = db_password.present? ? "--dbpass='#{db_password}'" : ""
+      inside(dir_name) do
+        run_command("wp core config --dbname='#{dir_name}' --dbuser='#{db_user}' #{db_password} --locale='#{locale}'") || error("Cannot configure wordpress")
+        run_command("wp core install --url='http://localhost:8080' --title='#{dir_name}' --admin_user='admin' --admin_password='#{admin_password}' --admin_email='#{admin_email}'") || error("Cannot finish the 5-minutes installation")
+      end
+      success("Configured successfully!")
+    end
+
     no_tasks do
 
       def tempfile
