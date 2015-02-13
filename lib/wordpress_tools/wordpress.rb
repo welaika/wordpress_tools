@@ -20,15 +20,11 @@ module WordPressTools
         @tempfile ||= Tempfile.new('wordpress')
       end
 
-      def http_download(domain, string)
-        Net::HTTP.get(domain, string)
-      end
-
       def download_wordpress
-        download_url, version, locale = http_download('api.wordpress.org', "/core/version-check/1.5/?locale=#{options[:locale]}").split[2,3]
+        download_url, version, locale = Net::HTTP.get('api.wordpress.org', "/core/version-check/1.5/?locale=#{options[:locale]}").split[2,3]
 
         info "Downloading WordPress #{version} (#{locale})..."
-        download(download_url, tempfile.path) || error("Could not download WordPress.")
+        get(download_url, tempfile.path, force: true, verbose: false) || error("Could not download WordPress.")
         unzip(tempfile.path, dir_name) || error("Could not unzip WordPress.")
         remove_nested_subdirectory
 
@@ -64,7 +60,11 @@ module WordPressTools
           warning "Could not find git installation."
         end
       end
-    end
 
+      def git_installed?
+        run_command("git --version")
+      end
+
+    end
   end
 end
