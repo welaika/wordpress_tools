@@ -20,7 +20,8 @@ Get some help:
 
 ```bash
 Options:
-  -l, [--locale=LOCALE]                  # WordPress locale (default is en_US)
+  -l, [--locale=LOCALE]                  # WordPress locale
+                                         # Default: en_US
   -b, [--bare=BARE]                      # Remove default themes and plugins
       [--admin-user=ADMIN_USER]          # WordPress admin user
                                          # Default: admin

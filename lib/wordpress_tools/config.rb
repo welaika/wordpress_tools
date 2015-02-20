@@ -12,7 +12,8 @@ module WordPressTools
       admin_password: "password",
       db_user: "root",
       db_password: "",
-      site_url: "http://localhost:8080"
+      site_url: "http://localhost:8080",
+      locale: "en_US"
     }.freeze
 
     def self.for(key)

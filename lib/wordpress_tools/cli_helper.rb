@@ -6,7 +6,7 @@ module WordPressTools
     class_methods do
       def shared_options
         [
-          [:locale, { aliases: "-l", desc: "WordPress locale (default is en_US)"}],
+          [:locale, { aliases: "-l", desc: "WordPress locale", default: Configuration.for(:locale)}],
           [:bare, {aliases: "-b", desc: "Remove default themes and plugins"}],
           [:admin_user, { desc: "WordPress admin user", default: Configuration.for(:admin_user)}],
           [:admin_email, {desc: "WordPress admin email", default: Configuration.for(:admin_email)}], 
