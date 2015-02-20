@@ -23,7 +23,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "thor", "~> 0.19.1"
   spec.add_dependency "activesupport", "~> 4.2"
 
-  spec.add_development_dependency "bundler", "~> 1.8"
+  spec.add_development_dependency "bundler", ">= 1.6.2"
   spec.add_development_dependency "rake", "~> 10.4"
   spec.add_development_dependency "rspec", "~> 3.2"
   spec.add_development_dependency "fakeweb", "~> 1.3"
