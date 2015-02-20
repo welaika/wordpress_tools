@@ -9,8 +9,6 @@ require "wordpress_tools/config"
 require "wordpress_tools/cli_helper"
 require "wordpress_tools/cli"
 require "wordpress_tools/wordpress"
-require "wordpress_tools/wp_cli"
+require "wordpress_tools/wp_cli_core"
+require "wordpress_tools/wp_cli_server"
 require "wordpress_tools/database"
-
-module WordPressTools
-end
