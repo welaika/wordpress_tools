@@ -20,6 +20,7 @@ Get some help:
 
 ```bash
 Options:
+      [--force]                          # Overwrite existing WP-CLI / WP-CLI Server installation
   -l, [--locale=LOCALE]                  # WordPress locale
                                          # Default: en_US
   -b, [--bare=BARE]                      # Remove default themes and plugins

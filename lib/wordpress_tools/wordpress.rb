@@ -1,6 +1,7 @@
 module WordPressTools
   class WordPress < Thor
     include CLIHelper
+    include SharedOptions
 
     attr_reader :dir_name
 

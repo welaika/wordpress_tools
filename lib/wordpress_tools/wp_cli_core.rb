@@ -1,8 +1,10 @@
 module WordPressTools
   class WPCLICore < Thor
     include CLIHelper
+    include SharedOptions
 
     desc "install", ""
+    add_method_options(shared_options)
     def install
       return unless overwrite?
 
@@ -20,7 +22,7 @@ module WordPressTools
 
     no_tasks do
       def overwrite?
-        if installed?
+        if installed? && options[:force] != true
           yes? "WP-CLI already installed [#{install_path}]. Do you want to overwite it? [y]es, [N]o"
         else
           true

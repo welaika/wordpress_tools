@@ -1,6 +1,7 @@
 module WordPressTools
   class Database < Thor
     include CLIHelper
+    include SharedOptions
 
     attr_reader :db_name
 
