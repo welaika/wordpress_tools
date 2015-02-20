@@ -11,9 +11,10 @@ module WordPressTools
       make_executable
 
       if installed?
-        success "WP-CLI installed"
+        success("WP-CLI installed")
+        check_bash_path || warning("Please, add #{install_path} to your shell '$PATH'")
       else
-        error "Could not install WP-CLI"
+        error("Could not install WP-CLI")
       end
     end
 
@@ -27,7 +28,7 @@ module WordPressTools
       end
 
       def installed?
-        run_command("which wp")
+        File.exist?(install_path) && File.executable?(install_path)
       end
 
       def download
@@ -59,15 +60,15 @@ module WordPressTools
       end
 
       def install_path
-        if installed?
-          run("which wp", verbose: false, capture: true).strip
-        else
-          Configuration.for(:wp_cli_path)
-        end
+        Configuration.for(:wp_cli_path)
       end
 
       def install_dir
         File.dirname(install_path)
+      end
+
+      def check_bash_path
+        run_command("which wp")
       end
     end
   end
