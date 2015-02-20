@@ -1,6 +1,6 @@
 # WordPress Tools
 
-A command line tool to help manage your WordPress sites.
+A command line tool to help manage your WordPress sites in development.
 
 [![Build Status](https://travis-ci.org/welaika/wordpress_tools.png?branch=master)](https://travis-ci.org/welaika/wordpress_tools)
 
@@ -10,17 +10,38 @@ A command line tool to help manage your WordPress sites.
 
 ## Usage
 
-Create a new WordPress site in directory `mysite`. This downloads the latest stable release of WordPress (you can also specify a locale):
-
     wordpress new mysite
-    wordpress new mysite --locale=fr_FR
+
+It installs and configures [WP-CLI](http://wp-cli.org/), [WP-CLI/server-command](https://github.com/wp-cli/server-command) and, finally, the latest version of [WordPress](http://wordpress.org) in `mysite` directory.
 
 Get some help:
 
-    wordpress help
+    wordpress help new
+
+```bash
+Options:
+  -l, [--locale=LOCALE]                  # WordPress locale (default is en_US)
+  -b, [--bare=BARE]                      # Remove default themes and plugins
+      [--admin-user=ADMIN_USER]          # WordPress admin user
+                                         # Default: admin
+      [--admin-email=ADMIN_EMAIL]        # WordPress admin email
+                                         # Default: admin@example.com
+      [--admin-password=ADMIN_PASSWORD]  # WordPress admin password
+                                         # Default: password
+      [--db-user=DB_USER]                # MySQL database user
+                                         # Default: root
+      [--db-password=DB_PASSWORD]        # MySQL database pasword
+      [--site-url=SITE_URL]              # Wordpress site URL
+                                         # Default: http://localhost:8080
+```
+
+Example
+
+    wordpress new mysite --locale=it_IT --bare
 
 ## Caveats
 
+- Default db-password is no password
 - If you attempt to download a WordPress localization that's outdated, the latest English version will be downloaded instead.
 - Not tested on Windows.
 
@@ -37,7 +58,7 @@ Get some help:
 
 (The MIT License)
 
-Copyright © 2013 weLaika
+Copyright © 2013-2015 weLaika
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the ‘Software’), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
