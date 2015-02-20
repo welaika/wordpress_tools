@@ -6,9 +6,5 @@
 /doc/
 /pkg/
 /spec/reports/
-/tmp/
-*.bundle
-*.so
-*.o
-*.a
-mkmf.log
+/tmp/*
+!.keep
