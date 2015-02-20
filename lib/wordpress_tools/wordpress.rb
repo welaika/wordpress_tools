@@ -1,12 +1,11 @@
 module WordPressTools
   class WordPress < Thor
     include CLIHelper
+
     attr_reader :dir_name
 
-    method_option :locale, aliases: "-l", desc: "WordPress locale (default is en_US)"
-    method_option :bare, aliases: "-b", desc: "Remove default themes and plugins"
-
     desc "download [DIR_NAME]", ""
+    add_method_options(shared_options)
     def download(dir_name = "wordpress")
       @dir_name = dir_name
       download_wordpress
@@ -14,12 +13,13 @@ module WordPressTools
       initialize_git_repo
     end
 
-    desc "setup [FOOOBAR]", ""
-    def setup(dir_name, db_user, db_password, admin_email, admin_password, locale)
-      db_password = db_password.present? ? "--dbpass='#{db_password}'" : ""
+    desc "setup [DIR_NAME]", ""
+    add_method_options(shared_options)
+    def setup(dir_name = "wordpress")
+      db_password = options[:db_password].present? ? "--dbpass='#{options[:db_password]}'" : ""
       inside(dir_name) do
-        run_command("wp core config --dbname='#{dir_name}' --dbuser='#{db_user}' #{db_password} --locale='#{locale}'") || error("Cannot configure wordpress")
-        run_command("wp core install --url='http://localhost:8080' --title='#{dir_name}' --admin_user='admin' --admin_password='#{admin_password}' --admin_email='#{admin_email}'") || error("Cannot finish the 5-minutes installation")
+        run_command("wp core config --dbname='#{dir_name}' --dbuser='#{options[:db_user]}' #{db_password} --locale='#{options[:locale]}'") || error("Cannot configure wordpress")
+        run_command("wp core install --url='#{options[:site_url]}' --title='#{dir_name}' --admin_user='#{options[:admin_user]}' --admin_password='#{options[:admin_password]}' --admin_email='#{options[:admin_email]}'") || error("Cannot finish the 5-minutes installation")
       end
       success("Configured successfully!")
     end

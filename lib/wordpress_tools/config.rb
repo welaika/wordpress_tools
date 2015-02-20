@@ -6,7 +6,13 @@ module WordPressTools
       wp_cli_path: "/usr/local/bin/wp",
       wp_cli_config_path: "~/.wp-cli/config.yml",
       wp_server_download_url: "https://github.com/wp-cli/server-command/archive/master.zip",
-      wp_server_directory: "~/.wp-cli/commands/server"
+      wp_server_directory: "~/.wp-cli/commands/server",
+      admin_user: "admin",
+      admin_email: "admin@example.com",
+      admin_password: "password",
+      db_user: "root",
+      db_password: "",
+      site_url: "http://localhost:8080"
     }.freeze
 
     def self.for(key)
