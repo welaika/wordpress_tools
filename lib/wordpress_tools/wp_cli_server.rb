@@ -29,19 +29,20 @@ module WordPressTools
       end
 
       def download
-        info "Installing WP-CLI server command"
+        info("Installing WP-CLI server command...")
         get(download_url, download_path, verbose: false, force: true) || error("Cannot download WP-CLI server command")
 
         FileUtils.mkdir_p(install_dir)
         unzip(download_path, install_dir, "-j")
 
-        success "Installed WP-CLI server command in '#{install_dir}'"
+        success("Installed WP-CLI server command in '#{install_dir}'")
       end
 
       def configure
+        info("Configuring WP-CLI server command...")
         FileUtils.mkdir_p(File.dirname(wp_cli_config_path))
         FileUtils.cp(File.expand_path("../../../templates/wp_cli_config.yml", __FILE__), wp_cli_config_path)
-        success "WP-CLI server command configured"
+        success("WP-CLI server command configured")
       end
 
       def download_url

@@ -10,15 +10,16 @@ module WordPressTools
         exit
       end
 
+      info("Starting...")
+
       WPCLICore.new.invoke :install
       WPCLIServer.new.invoke :install
       Database.new.invoke :create, [dir_name], options
       WordPress.new.invoke :download, [dir_name], options
       WordPress.new.invoke :setup, [dir_name], options
 
-      success("All done. Good job!")
+      success("All done. Run 'wp server' inside '#{dir_name}' and visit '#{options[:site_url]}'")
     end
-
   end
 end
 
