@@ -26,7 +26,7 @@ module WordPressTools
       end
 
       def mysql_create_command
-        "#{mysql_command} --execute='CREATE DATABASE #{db_name}'"
+        "#{mysql_command} --execute='CREATE DATABASE #{db_name} DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;'"
       end
 
       def mysql_command
