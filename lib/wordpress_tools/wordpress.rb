@@ -32,7 +32,7 @@ module WordPressTools
       end
 
       def download_wordpress
-        download_url, version, locale = Net::HTTP.get('api.wordpress.org', "/core/version-check/1.5/?locale=#{options[:locale]}").split[2,3]
+        download_url, version, locale = URI.parse("https://api.wordpress.org/core/version-check/1.5/?locale=#{options[:locale]}").read.split[2,3]
 
         info("Downloading WordPress #{version} (#{locale})...")
         get(download_url, tempfile.path, force: true, verbose: false) || error("Could not download WordPress")
