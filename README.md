@@ -3,6 +3,9 @@
 A command line tool to help manage your WordPress sites in development.
 
 [![Build Status](https://travis-ci.org/welaika/wordpress_tools.png?branch=master)](https://travis-ci.org/welaika/wordpress_tools)
+[![Code Climate](https://codeclimate.com/github/welaika/wordpress_tools/badges/gpa.svg)](https://codeclimate.com/github/welaika/wordpress_tools)
+[![Gem Version](http://img.shields.io/gem/v/wordpress_tools.svg)](https://rubygems.org/gems/wordpress_tools)
+[![License](http://img.shields.io/:license-mit-blue.svg)](http://www.mit-license.org)
 
 ## Installation
 
