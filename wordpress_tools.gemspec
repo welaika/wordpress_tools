@@ -6,8 +6,8 @@ require "wordpress_tools/version"
 Gem::Specification.new do |spec|
   spec.name          = "wordpress_tools"
   spec.version       = WordPressTools::VERSION
-  spec.authors       = ["Étienne Després", "Alessandro Fazzi", "Filippo Gangi Dino", "Ju Liu", "Fabrizio Monti"]
-  spec.email         = ["etienne@molotov.ca", "alessandro.fazzi@welaika.com", "filippo.gangidino@welaika.com", "ju.liu@welaika.com", "fabrizio.monti@welaika.com"]
+  spec.authors       = ["Étienne Després", "Alessandro Fazzi", "Filippo Gangi Dino", "Ju Liu", "Fabrizio Monti", "Matteo Piotto"]
+  spec.email         = ["etienne@molotov.ca", "alessandro.fazzi@welaika.com", "filippo.gangidino@welaika.com", "ju.liu@welaika.com", "fabrizio.monti@welaika.com", "matteo.piotto@welaika.com"]
   spec.summary       = %q{Manage WordPress installations.}
   spec.description   = %q{Command line tool to manage WordPress installations.}
   spec.homepage      = "http://github.com/welaika/wordpress_tools"
