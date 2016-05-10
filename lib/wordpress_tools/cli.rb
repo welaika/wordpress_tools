@@ -14,7 +14,6 @@ module WordPressTools
       info("Starting...")
 
       WPCLICore.new.invoke :install, [], options
-      WPCLIServer.new.invoke :install, [], options
       Database.new.invoke :create, [dir_name], options
       WordPress.new.invoke :download, [dir_name], options
       WordPress.new.invoke :setup, [dir_name], options

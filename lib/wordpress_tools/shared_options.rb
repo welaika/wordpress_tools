@@ -5,7 +5,7 @@ module WordPressTools
     class_methods do
       def shared_options
         [
-          [:force, { type: :boolean, desc: "Overwrite existing WP-CLI / WP-CLI Server installation" }],
+          [:force, { type: :boolean, desc: "Overwrite existing WP-CLI installation" }],
           [:locale, { aliases: "-l", desc: "WordPress locale", default: Configuration.for(:locale) }],
           [:bare, { type: :boolean, aliases: "-b", desc: "Remove default themes and plugins" }],
           [:admin_user, { desc: "WordPress admin user", default: Configuration.for(:admin_user) }],

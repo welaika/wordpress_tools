@@ -29,4 +29,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "fakeweb", "~> 1.3"
   spec.add_development_dependency "pry-byebug", "~> 3.0"
   spec.add_development_dependency "priscilla", "~> 1.0"
+  spec.add_development_dependency "gem-release"
 end
