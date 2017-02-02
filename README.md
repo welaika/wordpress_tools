@@ -59,6 +59,10 @@ Example
 5. Push to the branch (`git push origin my-new-feature`)
 6. Create new Pull Request
 
+## Author
+
+made with ❤️ and ☕️ by [weLaika](http://dev.welaika.com)
+
 ## License
 
 (The MIT License)
