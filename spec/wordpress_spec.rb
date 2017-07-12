@@ -1,8 +1,27 @@
-describe WordPressTools::WordPress do
+# frozen_string_literal: true
 
+describe WordPressTools::WordPress do
   before do
     @original_wd = Dir.pwd
     Dir.chdir('tmp')
+
+    WP_API_RESPONSE = <<-eof
+    upgrade
+    https://wordpress.org/download/
+    https://downloads.wordpress.org/release/wordpress-4.3.zip
+    4.3
+    en_US
+    5.2.4
+    5.0
+eof
+
+    WebMock
+      .stub_request(:get, %r{https://api.wordpress.org/core/version-check/1.5/.*})
+      .to_return(body: WP_API_RESPONSE)
+
+    WebMock
+      .stub_request(:get, "https://downloads.wordpress.org/release/wordpress-4.3.zip")
+      .to_return(body: File.open(File.expand_path '../spec/fixtures/wordpress_stub.zip'))
   end
 
   after do

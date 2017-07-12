@@ -22,11 +22,11 @@ describe WordPressTools::WPCLICore do
     let(:install_path) { './wp-cli' }
 
     before do
-      FakeWeb.register_uri(
+      WebMock.stub_request(
         :get,
         WordPressTools::Configuration.for(:wp_cli_download_url),
-        body: fixture_path
-      )
+      ).to_return(body: File.open(fixture_path))
+
       allow(cli).to receive(:install_path).and_return(install_path)
     end
 
