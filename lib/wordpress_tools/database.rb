@@ -30,10 +30,10 @@ module WordPressTools
       def mysql_create_command
         [
           mysql_command,
-          "--execute='CREATE DATABASE ",
+          "--execute='CREATE DATABASE",
           db_name,
           "DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;'"
-        ].join
+        ].join(' ')
       end
 
       def mysql_command
