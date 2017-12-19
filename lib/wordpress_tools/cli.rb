@@ -3,7 +3,8 @@ module WordPressTools
     include CLIHelper
     include SharedOptions
 
-    desc "new [DIR_NAME]", "download the latest stable version of WordPress in a new directory with specified name (default is wordpress)"
+    desc "new [DIR_NAME]", "download the latest stable version of WordPress in
+                            a new directory with specified name (default is wordpress)"
     add_method_options(shared_options)
     def new(dir_name = 'wordpress')
       if File.exist?(dir_name)
@@ -13,8 +14,8 @@ module WordPressTools
 
       info("Starting...")
 
-      WPCLICore.new.invoke :install, [], options
       Database.new.invoke :create, [dir_name], options
+      WPCLICore.new.invoke :install, [], options
       WordPress.new.invoke :download, [dir_name], options
       WordPress.new.invoke :setup, [dir_name], options
 
@@ -22,4 +23,3 @@ module WordPressTools
     end
   end
 end
-
