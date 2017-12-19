@@ -18,15 +18,22 @@ module WordPressTools
 
     no_tasks do
       def create_database
-        run_command(mysql_create_command) || error("Cannot create database '#{db_name}'. Already exists?")
+        run_command(mysql_create_command) ||
+          error("Cannot create database '#{db_name}'. Already exists?")
       end
 
       def test_login
-        run_command("#{mysql_command} --execute='QUIT'") || error("Cannot login to MySQL. Wrong credentials?")
+        run_command("#{mysql_command} --execute='QUIT'") ||
+          error("Cannot login to MySQL. Wrong credentials?")
       end
 
       def mysql_create_command
-        "#{mysql_command} --execute='CREATE DATABASE #{db_name} DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;'"
+        [
+          mysql_command,
+          "--execute='CREATE DATABASE ",
+          db_name,
+          "DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;'"
+        ].join
       end
 
       def mysql_command

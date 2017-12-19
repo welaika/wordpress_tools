@@ -35,21 +35,27 @@ module WordPressTools
 
       def download
         info("Downloading WP-CLI...")
-        get(download_url, download_path, verbose: false, force: true) || error("Cannot download WP-CLI")
+        get(download_url, download_path, verbose: false, force: true) ||
+          error("Cannot download WP-CLI")
+
         success("Downloaded WP-CLI")
       end
 
       def move
         info("Installing WP-CLI...")
         need_sudo = !File.writable?(install_dir)
-        run_command(move_command(download_path, install_path, need_sudo)) || error("Cannot install WP-CLI in '#{install_path}'")
+        run_command(move_command(download_path, install_path, need_sudo)) ||
+          error("Cannot install WP-CLI in '#{install_path}'")
+
         success("Installed WP-CLI in '#{install_path}'")
       end
 
       def make_executable
         info("Making WP-CLI executable...")
         need_sudo = !File.writable?(install_dir)
-        run_command(executable_bit_command(install_path, need_sudo)) || error("Cannot make WP-CLI executable")
+        run_command(executable_bit_command(install_path, need_sudo)) ||
+          error("Cannot make WP-CLI executable")
+
         success("WP-CLI is now executable")
       end
 
