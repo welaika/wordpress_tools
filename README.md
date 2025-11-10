@@ -6,6 +6,16 @@ A command line tool to help manage your WordPress sites in development.
 [![Code Climate](https://codeclimate.com/github/welaika/wordpress_tools/badges/gpa.svg)](https://codeclimate.com/github/welaika/wordpress_tools)
 [![Gem Version](http://img.shields.io/gem/v/wordpress_tools.svg)](https://rubygems.org/gems/wordpress_tools)
 [![License](http://img.shields.io/:license-mit-blue.svg)](http://www.mit-license.org)
+![unmaintained](https://img.shields.io/badge/status-unmaintained-red)
+
+> ## **⚠️ This repository has been archived and is no longer actively maintained.**
+>
+>
+> ### What this means:
+>
+> - No further updates, bug fixes, or security patches will be provided.
+> - Issues and pull requests will not be addressed.
+> - Use this code at your own risk.
 
 ## Installation
 
